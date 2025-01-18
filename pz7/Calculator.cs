@@ -8,8 +8,15 @@ namespace pz7
 {
     public class Calculator
     {
+        public delegate void OnCalculationPerformed(string message);
+        public event OnCalculationPerformed Notify;
+        void Message()
+        {
+            Console.WriteLine("Произошла операция");
+        }
         public double Add(double a, double b)
         {
+            //Notify?.Invoke("Произошло сложение");
             return a + b;
         }
         public double Sub(double a, double b)
