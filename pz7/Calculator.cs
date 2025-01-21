@@ -10,35 +10,42 @@ namespace pz7
     {
         public delegate void OnCalculationPerformed(string message);
         public event OnCalculationPerformed Notify;
-        void Message()
-        {
-            Console.WriteLine("Произошла операция");
-        }
+
         public double Add(double a, double b)
         {
-            //Notify?.Invoke("Произошло сложение");
-            return a + b;
+            double result = a + b;
+            Notify?.Invoke($"Произошло сложение: {a} + {b} = {result}");
+            return result;
         }
+
         public double Sub(double a, double b)
         {
-            return a - b;
+            double result = a - b;
+            Notify?.Invoke($"Произошло вычитание: {a} - {b} = {result}");
+            return result;
         }
+
         public double Mul(double a, double b)
         {
-            return a * b;
+            double result = a * b;
+            Notify?.Invoke($"Произошло умножение: {a} * {b} = {result}");
+            return result;
         }
+
         public double Divi(double a, double b)
         {
-            if (b == 0 || a == 0 || a == 0 & b == 0)
+            if (b == 0 || a == 0 || a == 0 && b == 0)
             {
-                Console.WriteLine("деление на 0 - ошибка");
+                Console.WriteLine("Деление на 0 - ошибка");
+                Notify?.Invoke("Ошибка: деление на 0");
                 return 0;
             }
             else
             {
-                return Math.Round(a / b, 3);
+                double result = Math.Round(a / b, 3);
+                Notify?.Invoke($"Произошло деление: {a} / {b} = {result}");
+                return result;
             }
-
         }
     }
 }
